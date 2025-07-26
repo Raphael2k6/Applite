@@ -1,5 +1,4 @@
 import Footer from "../footer";
-import { useState } from "react";
 import Meta from "./meta";
 import NavBar from "../navbar";
 import { ReactNode } from "react";

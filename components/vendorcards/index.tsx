@@ -1,7 +1,6 @@
-import { MdOutlinePeople } from "react-icons/md";
 import { IoMdStar } from "react-icons/io";
 import { Vendor } from "@/data";
-import { MdVerifiedUser, MdLocationOn } from "react-icons/md";
+import { MdVerifiedUser, MdLocationOn, MdOutlinePeople } from "react-icons/md";
 import { VscUnverified } from "react-icons/vsc";
 import { BsCalendarDateFill } from "react-icons/bs";
 
