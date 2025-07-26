@@ -5,6 +5,7 @@ import { vendors } from "@/data";
 import VendorCard from "../vendorcards";
 import VendorSkeleton from "./vendorskeleton";
 import Image from "next/image";
+import useDebounce from "@/utils/debounce";
 
 const tabs = [
   {
@@ -27,13 +28,15 @@ const VendorDirectoryComponent: React.FC = () => {
 
   const industryFilterDropdownRef = useRef<HTMLDivElement | null>(null);
 
+  const debouncedQuery = useDebounce(query, 500);
+
   useEffect(() => {
     // Simulate loading data
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, [query, selectedIndustry, active]);
+  }, [debouncedQuery, selectedIndustry, active]);
 
   const handleSetActive = (id: number) => {
     setActive(id);
@@ -75,7 +78,7 @@ const VendorDirectoryComponent: React.FC = () => {
   const filteredVendors = vendors.filter((vendor) => {
     const matchesQuery = vendor.companyName
       ?.toLowerCase()
-      ?.includes(query.toLowerCase());
+      ?.includes(debouncedQuery.toLowerCase());
 
     const matchesIndustry = selectedIndustry
       ? vendor.industry === selectedIndustry
