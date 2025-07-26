@@ -4,7 +4,7 @@ import { FaLinkedin, FaTwitter, FaFacebook, FaYoutube } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="bg-[#070807] py-6 pb-12 px-[8%]">
-      <div className="sm:hidden">
+      <div>
         <ul className="flex gap-6">
           <li>
             <FaTwitter className="text-white text-[26.5px]" />
