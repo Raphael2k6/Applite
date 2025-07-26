@@ -100,7 +100,7 @@ const VendorDirectoryComponent: React.FC = () => {
   return (
     <section className="py-12 px-4 md:px-8 lg:px-16 bg-gray-50">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-wrap items-center justify-between relative">
+        <div className="flex flex-wrap flex-col sm:flex-row sm:items-center sm:justify-between relative">
           <div className="flex w-fit flex-wrap items-center gap-2 rounded-full py-4 sm:flex-nowrap sm:gap-1 sm:px-4 md:my-6 md:gap-0 md:border md:px-3">
             {statusFilter}
           </div>
@@ -117,7 +117,7 @@ const VendorDirectoryComponent: React.FC = () => {
                 type="text"
                 className={`rounded-r-3xl transition-width duration-500 ease-in-out overflow-hidden px-2.5 py-[11.5px] border-0 rounded ${
                   showSearchInput
-                    ? "w-[20rem] rounded-l-3xl shadow-sm focus:outline-none focus:ring-0 ring-0 text-[0.813rem] font-300 indent-2 text-[#676767] border-[1px] border-[#e5e7eb]"
+                    ? "w-[16rem] sm:w-[20rem] rounded-l-3xl shadow-sm focus:outline-none focus:ring-0 ring-0 text-[0.813rem] font-300 indent-2 text-[#676767] border-[1px] border-[#e5e7eb]"
                     : "w-0 border-0 px-0 py-0 border-none"
                 }`}
                 value={query}
