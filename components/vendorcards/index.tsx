@@ -7,19 +7,11 @@ import { BsCalendarDateFill } from "react-icons/bs";
 
 interface VendorCardProps {
   item: Vendor;
-  className?: string;
 }
 
-const VendorCard: React.FC<VendorCardProps> = ({ item, className }) => {
-  console.log("VendorCard item:", item);
+const VendorCard: React.FC<VendorCardProps> = ({ item }) => {
   return (
-    <div
-      className={`${
-        className
-          ? className
-          : "relative h-[24rem] w-[19rem] xl:w-[25rem] rounded-3xl border-[#eeeeee] bg-white hover:shadow-lg"
-      }`}
-    >
+    <div className="relative h-[17rem] cursor-pointer rounded-3xl border border-[#eeeeee] shadow-sm bg-white hover:shadow-lg w-full">
       <div
         className={`${
           item.verificationStatus === "verified"

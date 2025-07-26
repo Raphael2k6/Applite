@@ -1,12 +1,7 @@
 import { LuBell } from "react-icons/lu";
 import { IoMenu } from "react-icons/io5";
 
-interface NavBarProps {
-  setIsOpen: Function;
-  isOpen?: boolean;
-}
-
-const NavBar: React.FC<NavBarProps> = ({ setIsOpen, isOpen }) => {
+const NavBar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-6 py-2 flex items-center justify-between w-full shadow-sm">
       {/* Left - Logo */}
@@ -23,8 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({ setIsOpen, isOpen }) => {
         <div className="w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">
           RD
         </div>
-        {/* Mobile Toggle */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden">
           <IoMenu />
         </button>
       </div>

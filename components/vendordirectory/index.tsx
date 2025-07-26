@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FiSearch } from "react-icons/fi";
 import { LuFilter } from "react-icons/lu";
-import { vendors, Vendor } from "@/data";
+import { vendors } from "@/data";
 import VendorCard from "../vendorcards";
 import VendorSkeleton from "./vendorskeleton";
+import Image from "next/image";
 
 const tabs = [
   {
@@ -17,14 +18,8 @@ const tabs = [
 ];
 
 const VendorDirectoryComponent: React.FC = () => {
-  const [servicesOptions, setServicesOptions] = useState(1);
-  const [products, setProducts] = useState([]);
   const [active, setActive] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-  const [lastPage, setLastPage] = useState(null);
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [query, setQuery] = useState("");
   const [showIndustryFilter, setShowIndustryFilter] = useState(false);
@@ -39,10 +34,6 @@ const VendorDirectoryComponent: React.FC = () => {
       setLoading(false);
     }, 1000);
   }, [query, selectedIndustry, active]);
-
-  const handleServicesOptions = (id: number) => {
-    setServicesOptions(id);
-  };
 
   const handleSetActive = (id: number) => {
     setActive(id);
@@ -79,7 +70,6 @@ const VendorDirectoryComponent: React.FC = () => {
   const uniqueIndustries = Array.from(
     new Set(vendors.map((vendor) => vendor.industry))
   );
-  console.log({ uniqueIndustries, query });
 
   // Filter vendors based on search query and selected industry
   const filteredVendors = vendors.filter((vendor) => {
@@ -99,14 +89,10 @@ const VendorDirectoryComponent: React.FC = () => {
 
   const skeletons = Array.from({ length: 8 });
 
-  // const lists = itemsToDisplay?.length > 0 ? itemsToDisplay : [];
-  const className =
-    "relative h-[17rem] cursor-pointer rounded-3xl border border-[#eeeeee] shadow-sm bg-white hover:shadow-lg w-full";
-
   const vendorList = filteredVendors.map((item, i) => {
     return (
       <div key={item.id} role="button" tabIndex={0}>
-        <VendorCard item={item} className={className} />
+        <VendorCard item={item} />
       </div>
     );
   });
@@ -177,7 +163,10 @@ const VendorDirectoryComponent: React.FC = () => {
             <span>Filtering by: </span>
             <strong>{selectedIndustry}</strong>
             <button
-              onClick={() => setSelectedIndustry("")}
+              onClick={() => {
+                setSelectedIndustry("");
+                setQuery("");
+              }}
               className="ml-2 text-blue-500 underline cursor-pointer"
             >
               Clear
@@ -197,9 +186,27 @@ const VendorDirectoryComponent: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
-            {vendorList}
-          </div>
+          <>
+            {filteredVendors.length === 0 ? (
+              <div className="flex flex-col items-center mx-auto justify-center h-full w-full">
+                <div>
+                  <h2 className="text-gray-500 text-lg mb-4 text-center">
+                    No vendors found
+                  </h2>
+                  <Image
+                    src="/list-empty.png"
+                    width={300}
+                    height={250}
+                    alt="Empty list"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
+                {vendorList}
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>
